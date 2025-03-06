@@ -2,13 +2,10 @@ package myAPI.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
+import static jakarta.persistence.FetchType.EAGER;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity(name = "tb_estabelecimentos")
 public class Emporium {
@@ -16,11 +13,12 @@ public class Emporium {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Account account;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "emporium", fetch = EAGER)
 	private List<Employee> employee;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "emporium", fetch = EAGER)
 	private List<Product> product;
 
 	public Account getAccount() {

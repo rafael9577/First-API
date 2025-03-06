@@ -17,26 +17,26 @@ import myAPI.services.ServicesAPI;
 @RestController
 @RequestMapping("/emporium")
 public class EmporiumController {
-	
-	private final ServicesAPI emporiumServices;
-	
-	public EmporiumController(ServicesAPI EmporiumServices) {
-		this.emporiumServices = EmporiumServices;
-	}
-	
-	@PostMapping
-	public ResponseEntity<Emporium> Create(@RequestBody Emporium emporiumToCreate) {
-		var emporiumCreated = emporiumServices.create(emporiumToCreate);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(emporiumToCreate.getId())
-				.toUri();
-		return ResponseEntity.created(location).body(emporiumCreated);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Emporium> FindById(@PathVariable Long id) {
-		var emporium = emporiumServices.findById(id);
-		return ResponseEntity.ok(emporium);
-	}
+
+    private final ServicesAPI emporiumServices;
+
+    public EmporiumController(ServicesAPI EmporiumServices) {
+        this.emporiumServices = EmporiumServices;
+    }
+
+    @PostMapping
+    public ResponseEntity<Emporium> Create(@RequestBody Emporium emporiumToCreate) {
+        var emporiumCreated = emporiumServices.create(emporiumToCreate);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(emporiumToCreate.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(emporiumCreated);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Emporium> FindById(@PathVariable Long id) {
+        var emporium = emporiumServices.findById(id);
+        return ResponseEntity.ok(emporium);
+    }
 }

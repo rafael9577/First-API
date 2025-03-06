@@ -1,54 +1,51 @@
 package myAPI.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity(name = "tb_produtos")
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-	@Column(nullable = false)
-	private String Name;
-	@Column(nullable = false)
-	private Integer Price;
-	private String descript;
+	@ManyToOne
+	@JoinColumn(name = "emporium_id")
+	private Emporium emporium;
 
-	public Long getId() {
-		return Id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
 
-	public String getName() {
-		return Name;
-	}
+    @Column(nullable = false)
+    private String Name;
 
-	public void setName(String name) {
-		Name = name;
-	}
+    @Column(nullable = false)
+    private Integer Price;
+    private String descript;
 
-	public Integer getValue() {
-		return Price;
-	}
+    public Long getId() {
+        return Id;
+    }
 
-	public void setValue(Integer value) {
-		Price = value;
-	}
+    public String getName() {
+        return Name;
+    }
 
-	public String getDescript() {
-		return descript;
-	}
+    public void setName(String name) {
+        Name = name;
+    }
 
-	public void setDescript(String descript) {
-		this.descript = descript;
-	}
+    public Integer getValue() {
+        return Price;
+    }
 
-	@Override
-	public String toString() {
-		return "Product [Id=" + Id + ", Name=" + Name + ", Value=" + Price + ", descript=" + descript + "]";
-	}
+    public void setValue(Integer value) {
+        Price = value;
+    }
+
+    public String getDescript() {
+        return descript;
+    }
+
+    public void setDescript(String descript) {
+        this.descript = descript;
+    }
 
 }
